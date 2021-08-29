@@ -1,10 +1,10 @@
 # py manage.py shell --> Запуск shell
 
-# from newapp.models import * --> импортируем модели
+# from newapp.models import *  # --> импортируем модели
 # User1 = User.objects.create(username='Den', first_name ='Sid') --> Создаём юзера
-# Author.objects.create(Author.User=User1) --> Делаем юзера автором
+# Author.objects.create(authorUser=User1) --> Делаем юзера автором
 # User2 = User.objects.create(username='Max', first_name ='Sid') --> Создаём 2 юзера
-# Author.objects.create(Author.User=User2) --> Делаем юзера автором
+# Author.objects.create(authorUser=User2) --> Делаем юзера автором
 # Category.objects.create(name='Python') --> Создаём категорию
 # Category.objects.create(name='Django') --> Создаём категорию
 # Category.objects.create(name='JS') --> Создаём категорию
@@ -34,6 +34,13 @@
 # a.ratingAuthor --> смотрим обновленный рейтинг
 # best = Author.objects.all().order_by('-ratingAuthor').values('authorUser', 'ratingAuthor')[0] --> username автора, рейтинг. Индекс первого объекта. [0:5] Весь рейтинг до 5 индекса
 # print(best)
-# d = User.objects.all().order_by('id').values('username', 'date_joined')[0:5] --> даты добавления, username 
+# d = User.objects.all().values('username', 'date_joined') --> даты добавления, username
 # print(d)
-# 
+# best_post = Post.objects.all().order_by('-rating').values('id','dateCreation', 'rating', 'author_id')[0] --> получили id дгчшего поста
+# prev = Post.objects.get(id=best_post['id']).preview() --> Превью
+# post_user = User.objects.get(id=best_post['author_id']) --> автор
+# print(f"Лучшая статья\n Автор: {post_user},\n Дата добавления: {best_post['dateCreation']},\n Рейтинг статьи: {best_post['rating']},\n {prev}")
+# comment_post = Comment.objects.get(id=best_post['id']).post_com() --> Коментарий к лучшей статье
+# print(comment_post)
+#
+#
